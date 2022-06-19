@@ -31,7 +31,7 @@ Module({
   var buttons = [{
     urlButton: {
         displayText: 'Github',
-        url: 'https://github.com/souravkl11/raganork'
+        url: 'https://github.com/akshitbhatia2004/WhatsApp_Bot_MD'
     }
 }, {
   urlButton: {
