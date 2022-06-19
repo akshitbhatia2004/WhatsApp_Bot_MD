@@ -13,8 +13,8 @@ Visit [Heroku status site](https://status.heroku.com) for more details
 <div>
 <br>
   
-<a href="https://raganork-api.vercel.app/api/deploy-md" target="blank"><img align="center" src="https://i.imgur.com/gtK4XLX.png" alt="Deploy bot" height="112" width="310" /></a>
-  <div>
+
+<a href="https://raganork-qr.herokuapp.com/"><img align="center" src="https://i.imgur.com/lLgFrTQ.png" alt="Scan QR" height="112" width="300" /></a>
 <br>
 <a href="https://github.com/sou6av/raganork-md-deploy/fork"><img align="center" src="https://i.imgur.com/hZILyIx.jpeg" alt="Fork and deploy" height="112" width="300" /></a>
 <div>
