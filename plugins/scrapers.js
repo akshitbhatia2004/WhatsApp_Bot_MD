@@ -258,10 +258,44 @@ Module({
     if (match[1] === '') return await message.sendReply('```Give me a movie name 👀.```');
 	var {data} = await axios(`https://pronoob-aio-drive.cf/Sct?search=${msgData.msgText.replaceAll`);
 	if (data.Response != 'True') return await message.sendReply(data.Error);
-	let msg = 
+	let msg = console.log(url);
+            // Fetch HTML of the page we want to scrape
+            const { data } = await axios.get(url);
+            // Load HTML we fetched in the previous line
+            const $ = cheerio.load(data);
+            const list = $(".m-2 div[title] span a");
+            let prefix = "https://pronoob-aio-drive.cf/";
+            let movieList = `🍿👀📽\n`;
 
-
-    var posterApi = (await axios(`https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=${data.Title}`)).data
-    var poster = posterApi.total_results !== 0 ? "https://image.tmdb.org/t/p/w500/"+posterApi.results[0].poster_path : data.Poster
-    return await message.client.sendMessage(message.jid,{image: {url: poster}, caption:msg},{quoted: message.data})
-});
+            if (list.length === 0) {
+                await sock.sendMessage(
+                    chatId, { text: `Movie not found! Give correct name dumbo` }, { quoted: msg }
+                );
+                return;
+            }
+            console.log("Movie list", list.length);
+            list.each((idx, el) => {
+                if (idx % 2 == 0) {
+                    if (!(idx & 1)) {
+                        let temp = $(el).attr("href");
+                        movieList = movieList + prefix + temp + "\n" + "\n🍿👀📽\n\n";
+                    }
+                }
+            });
+            let finalList = `${msgData.msgText} Links \n${movieList}`;
+            console.log(finalList);
+            await sock.sendMessage(chatId, { 
+                text: finalList,
+                linkPreview:true 
+                }, 
+                { quoted: msg }
+            );
+        } catch (err) {
+            console.log(err);
+            await sock.sendMessage(
+                chatId, { text: `${err.message}` }, { quoted: msg }
+            );
+        }
+    }
+}
+module.exports = MovieLinks;
